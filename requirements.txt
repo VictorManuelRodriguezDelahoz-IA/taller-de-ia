@@ -1,0 +1,52 @@
+# Dependencias Globales del Taller de IA
+
+# Core ML/AI Libraries
+openai>=1.12.0
+anthropic>=0.18.0
+langchain>=0.1.0
+langchain-openai>=0.0.5
+langchain-anthropic>=0.1.0
+langgraph>=0.0.20
+langsmith>=0.0.87
+
+# Vector Stores & Embeddings
+chromadb>=0.4.22
+faiss-cpu>=1.7.4
+sentence-transformers>=2.3.1
+
+# LLM Tools
+llama-cpp-python>=0.2.0
+transformers>=4.36.0
+torch>=2.1.0
+
+# Web & API
+fastapi>=0.109.0
+uvicorn>=0.27.0
+httpx>=0.26.0
+requests>=2.31.0
+
+# Search & Retrieval
+tavily-python>=0.3.0
+
+# Data Processing
+numpy>=1.24.0
+pandas>=2.1.0
+python-dotenv>=1.0.0
+
+# Jupyter & Notebooks
+jupyter>=1.0.0
+ipykernel>=6.29.0
+ipywidgets>=8.1.1
+
+# Utilities
+tqdm>=4.66.0
+pydantic>=2.5.0
+tiktoken>=0.5.2
+
+# Testing & Validation
+pytest>=7.4.0
+pytest-asyncio>=0.23.0
+
+# Visualization
+matplotlib>=3.8.0
+plotly>=5.18.0
