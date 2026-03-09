@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickIT Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">C</div>
+        <span class="logo-text">ClickIT</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-section="overview">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            Overview
+        </a>
+        <a href="#" class="nav-item" data-section="proposals">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Propuestas
+        </a>
+        <a href="#" class="nav-item" data-section="clients">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Clientes
+        </a>
+        <a href="#" class="nav-item" data-section="ai-chat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Chat IA
+        </a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="user-badge">
+            <div class="user-avatar">P</div>
+            <div class="user-info">
+                <span class="user-name">Poncho</span>
+                <span class="user-role">CEO</span>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+    <!-- HEADER -->
+    <header class="main-header">
+        <div>
+            <h1 class="page-title" id="pageTitle">Overview</h1>
+            <p class="page-subtitle" id="pageSubtitle">Bienvenido, Poncho. Aqui esta el resumen de ClickIT.</p>
+        </div>
+        <div class="header-actions">
+            <span class="date-badge" id="currentDate"></span>
+        </div>
+    </header>
+
+    <!-- SECTIONS -->
+
+    <!-- OVERVIEW -->
+    <section id="section-overview" class="section active">
+        <div class="kpi-grid">
+            <div class="kpi-card kpi-revenue">
+                <div class="kpi-icon">$</div>
+                <div class="kpi-data">
+                    <span class="kpi-value" id="kpiRevenue">--</span>
+                    <span class="kpi-label">Revenue Total</span>
+                </div>
+            </div>
+            <div class="kpi-card kpi-pipeline">
+                <div class="kpi-icon">~</div>
+                <div class="kpi-data">
+                    <span class="kpi-value" id="kpiPipeline">--</span>
+                    <span class="kpi-label">Pipeline Activo</span>
+                </div>
+            </div>
+            <div class="kpi-card kpi-clients">
+                <div class="kpi-icon">#</div>
+                <div class="kpi-data">
+                    <span class="kpi-value" id="kpiClients">--</span>
+                    <span class="kpi-label">Clientes Activos</span>
+                </div>
+            </div>
+            <div class="kpi-card kpi-satisfaction">
+                <div class="kpi-icon">*</div>
+                <div class="kpi-data">
+                    <span class="kpi-value" id="kpiSatisfaction">--</span>
+                    <span class="kpi-label">Satisfaccion Promedio</span>
+                </div>
+            </div>
+            <div class="kpi-card kpi-winrate">
+                <div class="kpi-icon">%</div>
+                <div class="kpi-data">
+                    <span class="kpi-value" id="kpiWinRate">--</span>
+                    <span class="kpi-label">Win Rate</span>
+                </div>
+            </div>
+            <div class="kpi-card kpi-team">
+                <div class="kpi-icon">&</div>
+                <div class="kpi-data">
+                    <span class="kpi-value" id="kpiTeam">--</span>
+                    <span class="kpi-label">Equipo</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3 class="chart-title">Revenue vs Costos (Mensual)</h3>
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title">Satisfaccion del Cliente</h3>
+                <canvas id="satisfactionChart"></canvas>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3 class="chart-title">Propuestas por Estado</h3>
+                <canvas id="proposalsPieChart"></canvas>
+            </div>
+            <div class="chart-card ai-insights-card">
+                <h3 class="chart-title">Insights de IA <span class="ai-badge">AI</span></h3>
+                <div id="aiInsights" class="ai-insights-content">
+                    <div class="loading-dots"><span></span><span></span><span></span></div>
+                </div>
+                <button class="btn-refresh" id="refreshInsights">Regenerar Insights</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROPOSALS -->
+    <section id="section-proposals" class="section">
+        <div class="section-toolbar">
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="won">Ganadas</button>
+                <button class="filter-btn" data-filter="pending">Pendientes</button>
+                <button class="filter-btn" data-filter="in_progress">En Progreso</button>
+                <button class="filter-btn" data-filter="lost">Perdidas</button>
+            </div>
+        </div>
+        <div class="proposals-grid" id="proposalsGrid"></div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section id="section-clients" class="section">
+        <div class="section-toolbar">
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="active">Activos</button>
+                <button class="filter-btn" data-filter="at_risk">En Riesgo</button>
+                <button class="filter-btn" data-filter="churned">Perdidos</button>
+                <button class="filter-btn" data-filter="prospect">Prospectos</button>
+            </div>
+        </div>
+        <div class="clients-table-wrapper">
+            <table class="clients-table">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Industria</th>
+                        <th>Contacto</th>
+                        <th>Status</th>
+                        <th>Satisfaccion</th>
+                        <th>Revenue</th>
+                        <th>Proyectos</th>
+                    </tr>
+                </thead>
+                <tbody id="clientsTableBody"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- AI CHAT -->
+    <section id="section-ai-chat" class="section">
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content">
+                        <p>Hola Poncho! Soy tu asistente de IA. Puedo ayudarte con:</p>
+                        <ul>
+                            <li>Analizar el estado de propuestas y pipeline</li>
+                            <li>Revisar satisfaccion de clientes</li>
+                            <li>Dar recomendaciones de negocio</li>
+                            <li>Generar reportes ejecutivos</li>
+                        </ul>
+                        <p>Preguntame lo que necesites!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" class="chat-input" placeholder="Escribe tu pregunta..." />
+                <button id="chatSend" class="chat-send-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
