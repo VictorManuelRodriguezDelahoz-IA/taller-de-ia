@@ -98,7 +98,9 @@ def campos_faltantes(traza):
     # TODO: devuelve los campos de CAMPOS_OBLIGATORIOS que no estan en la traza
     ...
 
-print("faltan:", campos_faltantes(L.TRAZAS[0]))
+arbol(L.TRAZAS[0]["trace_id"])
+faltan = campos_faltantes(L.TRAZAS[0])
+print("faltan:", faltan, "  (None = TODO sin resolver | [] = no falta ninguno)")
 
 # %% [markdown]
 # ---

@@ -9,9 +9,15 @@ Formato:
     # %%
     codigo
 """
+import hashlib
 import io
 import json
 import sys
+
+
+def _id(n):
+    """Identificador estable por posicion: nbformat lo exige a partir de la 4.5."""
+    return "celda-%03d" % n
 
 
 def construir(ruta_py, ruta_nb):
@@ -27,11 +33,12 @@ def construir(ruta_py, ruta_nb):
         if tipo == "markdown":
             fuente = "\n".join(l[2:] if l.startswith("# ") else ("" if l.strip() == "#" else l)
                                for l in txt.splitlines())
-            celdas.append({"cell_type": "markdown", "metadata": {},
+            celdas.append({"cell_type": "markdown", "metadata": {}, "id": _id(len(celdas)),
                            "source": fuente.splitlines(keepends=True)})
         else:
             celdas.append({"cell_type": "code", "execution_count": None, "metadata": {},
-                           "outputs": [], "source": txt.splitlines(keepends=True)})
+                           "id": _id(len(celdas)), "outputs": [],
+                           "source": txt.splitlines(keepends=True)})
 
     for l in lineas:
         if l.startswith("# %% [markdown]"):

@@ -230,6 +230,9 @@ print(llamar_validado(prompt_flojo, esquema=ESQUEMA_EXIGENTE))
 ESQUEMA_V2 = dict(ESQUEMA)
 # ESQUEMA_V2["confianza"] = {"tipo": float, "minimo": 0.0, "maximo": 1.0, "obligatorio": True}
 
+print("campos del esquema:", list(ESQUEMA_V2))
+print("OK" if "confianza" in ESQUEMA_V2 else "Todavia falta 'confianza' en ESQUEMA_V2.")
+
 # %% [markdown]
 # ---
 # ## 4. El contexto es un escritorio, no una memoria
@@ -274,13 +277,14 @@ def fragmento_relevante(doc, consulta, max_tokens=300):
     #       recortada a max_tokens.
     secciones = [s for s in doc.split("## ") if s.strip()]
     ...
-    return secciones[0][: max_tokens * 4]
+    return doc          # <-- sin podar: devuelve el documento entero
 
 antes = total
 despues = contar_tokens(partes["1. instrucciones (fijo)"]) + contar_tokens(TICKET) + \
           contar_tokens(fragmento_relevante(runbook, TICKET))
-print("antes: %d tokens | despues: %d tokens | ahorro: %.0f%%"
-      % (antes, despues, 100 * (1 - despues / antes)))
+ahorro = 100 * (1 - despues / antes)
+print("antes: %d tokens | despues: %d tokens | ahorro: %.0f%%" % (antes, despues, ahorro))
+print("OK" if ahorro > 50 else "El ahorro es bajo: todavia estas mandando el documento entero.")
 
 # %% [markdown]
 # ---
@@ -347,7 +351,10 @@ def plan_bueno(estado):
     # TODO: paso 0 -> buscar_logs, paso 1 -> reiniciar_pod, paso 2 -> None (terminar)
     ...
 
-# res = bucle(plan_bueno); print(res["parada"], res["historial"])
+res = bucle(plan_bueno)
+print("parada:", res["parada"], "| pasos dados:", len(res["historial"]))
+print("OK" if len(res["historial"]) == 2 and res["parada"] == "tarea completada"
+      else "Todavia no: deberia dar 2 pasos y parar por 'tarea completada'.")
 
 # %% [markdown]
 # ---

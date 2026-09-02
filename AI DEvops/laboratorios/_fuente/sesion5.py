@@ -265,6 +265,11 @@ def gate_seguridad(fallos, maximo=0):
     # TODO: devuelve (pasa, motivo). Recuerda: en seguridad el umbral es cero.
     ...
 
+print("sin controles (%d ataques):" % fallos_1, gate_seguridad(fallos_1))
+print("con controles (%d ataques):" % fallos_2, gate_seguridad(fallos_2))
+print("OK" if gate_seguridad(fallos_1) and gate_seguridad(fallos_1)[0] is False
+      else "Todavia no: con ataques que pasan, el gate tiene que bloquear.")
+
 # %% [markdown]
 # ---
 # ## 7. Datos sensibles: redactar antes de enviar

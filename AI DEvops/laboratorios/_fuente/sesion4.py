@@ -93,6 +93,13 @@ def costo_por_tarea_resuelta(trazas, tareas_ok, tareas_a_humano, coste_humano=0.
     # TODO: (costo de modelo + coste humano total) / tareas resueltas
     ...
 
+por_request = total / len(L.TRAZAS)
+por_tarea = costo_por_tarea_resuelta(L.TRAZAS, tareas_ok=140, tareas_a_humano=22)
+print("costo por request: %.6f USD" % por_request)
+print("costo por tarea resuelta:", por_tarea)
+print("OK: mira cuantas veces mas caro es" if por_tarea else
+      "Todavia no: al incluir el tiempo humano el numero sube uno o dos ordenes de magnitud.")
+
 # %% [markdown]
 # ---
 # ## 2. Controles duros: cortar, no avisar

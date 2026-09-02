@@ -372,6 +372,12 @@ def juicio_robusto(ticket, buena, mala, referencia):
     #       si se contradicen devuelve "empate".
     ...
 
+caso = CASOS[0]
+veredicto = juicio_robusto(caso["entrada"], PARES[0][0], PARES[0][1],
+                           json.dumps(caso["esperado"], ensure_ascii=False))
+print("veredicto:", veredicto)
+print("OK" if veredicto == "buena" else "Todavia no: con la rubrica corregida deberia salir 'buena'.")
+
 # %% [markdown]
 # ---
 # ## Cierre
