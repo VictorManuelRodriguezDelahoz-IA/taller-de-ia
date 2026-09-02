@@ -1,0 +1,14 @@
+# Laboratorios del Taller AI DevOps
+#
+# Lo MINIMO para correr los cinco notebooks (todo funciona sin API key,
+# con el proveedor simulado que trae lab_utils.py):
+jupyter>=1.0.0
+ipykernel>=6.29.0
+
+# Opcional pero recomendado (tablas mas bonitas y conteo de tokens exacto):
+pandas>=2.0.0
+tiktoken>=0.5.2
+
+# Opcional: solo si vas a usar modelos reales en vez del simulador
+# openai>=1.12.0
+# anthropic>=0.40.0

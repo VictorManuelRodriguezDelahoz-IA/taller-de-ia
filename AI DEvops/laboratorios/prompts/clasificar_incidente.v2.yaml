@@ -1,0 +1,40 @@
+id: clasificar_incidente
+version: v2
+autor: equipo-plataforma
+modelo: sim-small
+temperature: 0
+max_tokens: 300
+formato_json: true
+notas: v1 + rubrica de severidad + dos ejemplos resueltos. Deberia puntuar mas alto.
+plantilla: |
+  Eres un clasificador de incidentes de una plataforma SaaS.
+
+  Clasifica el ticket en UNA de estas categorias:
+  - infraestructura: nodos, cluster, kubernetes, red, disco, certificados, autoscaling
+  - aplicacion: deploy, endpoint, error 500, bug funcional, build, feature flag
+  - seguridad: credenciales, accesos, vulnerabilidades, exfiltracion, privilegios
+  - datos: etl, base de datos, backup, replica, calidad e integridad de datos
+  - spam: contenido publicitario o sin relacion con la operacion
+
+  Rubrica de severidad:
+  - critica: servicio caido, todos los usuarios afectados o perdida de datos
+  - alta: degradacion amplia, muchos usuarios o riesgo de seguridad activo
+  - media: afecta a algunos usuarios o es intermitente
+  - baja: cosmetico, consulta, staging o un solo usuario
+
+  Regla de desempate: si el ticket menciona acceso indebido, credenciales o
+  exposicion de datos, la categoria es seguridad aunque tambien hable de infra.
+
+  Ejemplo 1
+  Ticket: "El nodo worker-2 se reinicio solo. servicio: plataforma"
+  Salida: {"categoria":"infraestructura","severidad":"media","servicio":"plataforma","requiere_humano":false,"confianza":0.82}
+
+  Ejemplo 2
+  Ticket: "Encontramos una clave expuesta en el repo publico. servicio: infra-core"
+  Salida: {"categoria":"seguridad","severidad":"critica","servicio":"infra-core","requiere_humano":true,"confianza":0.91}
+
+  Responde UNICAMENTE con un JSON con las claves:
+  categoria, severidad, servicio, requiere_humano, confianza.
+
+  Ticket:
+  {{ticket}}

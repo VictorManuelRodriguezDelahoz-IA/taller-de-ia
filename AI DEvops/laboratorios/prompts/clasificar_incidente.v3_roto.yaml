@@ -1,0 +1,11 @@
+id: clasificar_incidente
+version: v3_roto
+autor: alguien-con-prisa
+modelo: sim-small
+temperature: 0.9
+max_tokens: 300
+formato_json: false
+notas: EMPEORADA A PROPOSITO. Se usa en el Lab 2 y en el Lab 3 para provocar la regresion.
+plantilla: |
+  Clasifica esto:
+  {{ticket}}
