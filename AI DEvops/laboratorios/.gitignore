@@ -1,0 +1,5 @@
+resultados/*.json
+!resultados/baseline.json
+__pycache__/
+.ipynb_checkpoints/
+.env

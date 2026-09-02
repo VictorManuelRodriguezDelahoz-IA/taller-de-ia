@@ -1,0 +1,17 @@
+# Configuracion del gate de evaluacion (Sesion 3).
+# Este archivo es el contrato: si no esta escrito aqui, no existe.
+eval_gate:
+  dataset: golden_incidentes.jsonl
+  prompt: clasificar_incidente.v2.yaml
+  runs_per_case: 3
+  thresholds:
+    score_global: 0.90
+    validez_esquema: 0.98
+    caida_por_grupo: 0.05
+    costo_por_caso_usd: 0.0004
+    latencia_p95_ms: 2000
+  on_fail: block_merge
+  publish: score_diff_por_grupo
+  excepcion:
+    requiere: aprobacion_nominal
+    registra: motivo + caducidad

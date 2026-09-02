@@ -1,0 +1,40 @@
+# Copia este archivo a .github/workflows/eval.yml en tu repositorio.
+# Es el pipeline de la Sesion 3: el eval corre en cada cambio y BLOQUEA si no pasa.
+name: eval-gate
+
+on:
+  pull_request:
+    paths:
+      - "prompts/**"
+      - "gate.yaml"
+      - "**/*.py"
+  workflow_dispatch:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Pruebas unitarias
+        run: python -m pytest -q || true   # sustituye por tus pruebas reales
+
+      - name: Eval contra el set dorado (bloquea si no pasa)
+        env:
+          # Sin clave, el laboratorio corre con el proveedor simulado.
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python ci_eval.py
+
+      - name: Publicar el resultado como artefacto
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-resultados
+          path: resultados/

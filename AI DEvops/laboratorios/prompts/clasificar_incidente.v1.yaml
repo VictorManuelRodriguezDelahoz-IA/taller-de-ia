@@ -1,0 +1,26 @@
+id: clasificar_incidente
+version: v1
+autor: equipo-plataforma
+modelo: sim-small
+temperature: 0
+max_tokens: 300
+formato_json: true
+notas: version base. Sin ejemplos. Es la que hay que superar.
+plantilla: |
+  Eres un clasificador de incidentes de una plataforma SaaS.
+
+  Clasifica el ticket en UNA de estas categorias:
+  - infraestructura: nodos, cluster, kubernetes, red, disco, certificados, autoscaling
+  - aplicacion: deploy, endpoint, error 500, bug funcional, build, feature flag
+  - seguridad: credenciales, accesos, vulnerabilidades, exfiltracion, privilegios
+  - datos: etl, base de datos, backup, replica, calidad e integridad de datos
+  - spam: contenido publicitario o sin relacion con la operacion
+
+  Asigna tambien la severidad: critica, alta, media o baja.
+  Extrae el servicio si aparece explicito; si no, usa "desconocido".
+
+  Responde UNICAMENTE con un JSON con las claves:
+  categoria, severidad, servicio, requiere_humano, confianza.
+
+  Ticket:
+  {{ticket}}

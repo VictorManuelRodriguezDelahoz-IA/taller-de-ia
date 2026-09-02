@@ -1,0 +1,24 @@
+{
+  "etiqueta": "ci",
+  "prompt_id": "clasificar_incidente:v2",
+  "modelo": "sim-small",
+  "commit": "6f72df8",
+  "casos": 40,
+  "runs_por_caso": 3,
+  "score_global": 0.95,
+  "exactitud_categoria": 0.975,
+  "validez_esquema": 1.0,
+  "por_grupo": {
+    "cat:aplicacion": 0.95,
+    "cat:datos": 0.95,
+    "cat:infraestructura": 1.0,
+    "cat:seguridad": 0.95,
+    "cat:spam": 0.75,
+    "dificil": 0.9167,
+    "rechazo": 0.875,
+    "tipico": 0.9792
+  },
+  "costo_usd": 0.010789,
+  "costo_por_caso_usd": 9e-05,
+  "latencia_p95_ms": 535
+}
