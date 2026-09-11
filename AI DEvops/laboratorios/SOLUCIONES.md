@@ -111,59 +111,49 @@ seguridad, no es un ahorro: es un riesgo mal contabilizado.
 
 ## Sesion 2
 
-### Ejercicio 1 - Auditar el set dorado
+### Ejercicio 1 - ¿Hay categorías con muy pocos casos?
 
 ```python
-def auditar(casos):
-    avisos = []
-    cat = Counter(c["esperado"]["categoria"] for c in casos)
-    for k, v in cat.items():
-        if v < 3:
-            avisos.append("la categoria '%s' solo tiene %d casos: no podras medirla" % (k, v))
-    dificiles = sum(1 for c in casos if c["dificultad"] == "dificil") / len(casos)
-    if dificiles < 0.20:
-        avisos.append("solo el %.0f%% son dificiles: el set es demasiado facil" % (100 * dificiles))
-    vistos, dup = set(), 0
-    for c in casos:
-        clave = " ".join(c["entrada"].lower().split())
-        dup += clave in vistos
-        vistos.add(clave)
-    if dup:
-        avisos.append("%d casos duplicados: inflan el puntaje sin aportar informacion" % dup)
-    return avisos
+def categorias_con_pocos_casos(casos, minimo=3):
+    cuenta = Counter(c["esperado"]["categoria"] for c in casos)
+    pocas = []
+    for categoria, n in cuenta.items():
+        if n < minimo:
+            pocas.append(categoria)
+    return pocas
 ```
 
-### Ejercicio 2 - Guardar y comparar
+Sale `['spam']`: solo tiene 2 casos, así que su **resolución** es 1 / (2 × 4) = 0,125. Un solo
+campo que pasa de bien a mal mueve su nota ese salto entero. Vuelve a aparecer en el paso 5 y
+en el Ejercicio 2.
 
-Estan resueltos en `evaluador.py` (`guardar` y `comparar`). Lo importante:
+### Ejercicio 2 - ¿Dejarías pasar este cambio?
 
 ```python
-def comparar(anterior, nuevo, caida_maxima=0.05):
-    motivos = []
-    for grupo, valor in nuevo["por_grupo"].items():
-        antes = anterior["por_grupo"].get(grupo)
-        if antes is not None and antes - valor > caida_maxima:
-            motivos.append("%s cae %.3f (%.3f -> %.3f)" % (grupo, antes - valor, antes, valor))
-    return ("BLOQUEAR" if motivos else "PASA"), motivos
+def decidir(antes, despues, caida_maxima=0.05):
+    bajadas = []
+    for grupo, nota_despues in despues["por_grupo"].items():
+        nota_antes = antes["por_grupo"][grupo]
+        if nota_antes - nota_despues > caida_maxima:
+            bajadas.append(grupo)
+    return "BLOQUEAR" if bajadas else "PASA"
 ```
 
-Corre `comparar(base, mejor)` sobre v1 y v2: el global sube y aun asi la clase `spam`
-baja. Un promedio estable esconde una clase rota.
+El prompt roto sale `BLOQUEAR`. La v2 normalmente también: spam baja 0,125, que es exactamente
+un salto de resolución (un campo en uno de sus 2 casos). Es un **falso positivo** del gate.
+Dos arreglos posibles: añadir casos de spam al golden set, o usar una tolerancia por grupo que
+no sea menor que su resolución, por ejemplo `max(0.05, 1 / (4 * n))`.
 
-### Ejercicio 4 - Juicio robusto al orden
+### Ejercicio 3 - ¿Cuál de los tres cambios es el que importa?
 
-```python
-def juicio_robusto(ticket, buena, mala, referencia):
-    g1 = juzgar(RUBRICA_BUENA, ticket, buena, mala, referencia)   # buena en A
-    g2 = juzgar(RUBRICA_BUENA, ticket, mala, buena, referencia)   # buena en B
-    if g1 == "A" and g2 == "B":
-        return "buena"
-    if g1 == "B" and g2 == "A":
-        return "mala"
-    return "empate"      # el juez se contradice: a revision humana
-```
+No hay código que escribir: se borra la línea `Respuesta de referencia: {{referencia}}`
+de `MI_JUEZ` y se vuelve a ejecutar.
 
-La tasa de `empate` **es** la medida del sesgo de posicion de tu juez.
+Es una **ablación**: quitas un control y mides el efecto. El acierto cae de 100% a alrededor
+de 15% (buena en A) y 0% (buena en B). Lo que hace fiable al juez es darle el ground truth como
+referencia (*reference-guided grading*); las instrucciones sobre orden y longitud, solas, no
+bastan. La consistencia, en cambio, sigue alta (alrededor de 85%): el juez se equivoca siempre
+igual, eligiendo la respuesta larga. Consistente no es lo mismo que correcto. Y si se borra solo "Penaliza el relleno", no cambia nada: sigue en 100%.
 
 ---
 

@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import json
 import subprocess
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import lab_utils as L
@@ -121,3 +121,86 @@ def comparar(anterior, nuevo, caida_maxima=0.05):
         if antes - valor > caida_maxima:
             motivos.append("%s cae %.3f (%.3f -> %.3f)" % (grupo, antes - valor, antes, valor))
     return ("BLOQUEAR" if motivos else "PASA"), motivos
+
+
+# --------------------------------------------------------------------------
+# Para leer los resultados sin descifrar diccionarios (Sesion 2)
+# --------------------------------------------------------------------------
+_NOMBRE_DIFICULTAD = {"tipico": "típico", "dificil": "difícil", "rechazo": "rechazo"}
+
+
+def _nombre_grupo(grupo):
+    return grupo[4:] if grupo.startswith("cat:") else _NOMBRE_DIFICULTAD.get(grupo, grupo)
+
+
+def _grupos_ordenados(res):
+    dificultades = [g for g in ("tipico", "dificil", "rechazo") if g in res["por_grupo"]]
+    categorias = sorted(g for g in res["por_grupo"] if g.startswith("cat:"))
+    return dificultades, categorias
+
+
+def boletin(res):
+    """Imprime el resultado de correr_eval como un boletin de notas."""
+    total = res["casos"] * res["runs_por_caso"]
+    print("BOLETÍN DE NOTAS · %s" % res["etiqueta"])
+    print("prompt %s · modelo %s · commit %s" % (res["prompt_id"], res["modelo"], res["commit"]))
+    print("%d casos x %d corridas = %d predicciones evaluadas" % (res["casos"], res["runs_por_caso"], total))
+    print("")
+    for nombre, valor in (("Nota global", res["score_global"]),
+                          ("Acierta la categoría", res["exactitud_categoria"]),
+                          ("JSON válido", res["validez_esquema"])):
+        print("  %-24s %.2f  %s" % (nombre, valor, L.barra(valor, 20)))
+    print("  %-24s %.6f USD" % ("Costo por predicción", res["costo_por_caso_usd"]))
+    print("  %-24s %d ms" % ("Tiempo (p95)", res["latencia_p95_ms"]))
+    dificultades, categorias = _grupos_ordenados(res)
+    for titulo, grupos in (("Nota por dificultad", dificultades), ("Nota por categoría", categorias)):
+        print("")
+        print("  " + titulo)
+        for g in grupos:
+            v = res["por_grupo"][g]
+            print("    %-20s %.2f  %s" % (_nombre_grupo(g), v, L.barra(v, 20)))
+
+
+def donde_se_equivoca(res, top=5):
+    """Las confusiones de categoria mas frecuentes, en palabras."""
+    errores = Counter((real, dijo) for real, dijo in res["pares"] if real != dijo)
+    total = len(res["pares"])
+    if not errores:
+        print("No se equivocó de categoría ni una vez en %d predicciones." % total)
+        return
+    print("Se equivocó de categoría en %d de %d predicciones. Lo que más confunde:"
+          % (sum(errores.values()), total))
+    print("")
+    for (real, dijo), veces in errores.most_common(top):
+        print("  era %-16s y dijo %-18s %2d veces" % (real, dijo or "(JSON ilegible)", veces))
+
+
+def comparar_versiones(antes, despues):
+    """Pone dos boletines lado a lado y avisa de las categorias que bajan."""
+    def fila(nombre, a, b):
+        d = b - a
+        marca = "sube" if d > 0.005 else ("BAJA" if d < -0.005 else "igual")
+        print("  %-24s %.2f  ->  %.2f   %+.2f  %s" % (nombre, a, b, d, marca))
+
+    print("%s  ->  %s" % (antes["etiqueta"], despues["etiqueta"]))
+    print("")
+    fila("Nota global", antes["score_global"], despues["score_global"])
+    fila("Acierta la categoría", antes["exactitud_categoria"], despues["exactitud_categoria"])
+    fila("JSON válido", antes["validez_esquema"], despues["validez_esquema"])
+    dificultades, categorias = _grupos_ordenados(despues)
+    bajan = []
+    for titulo, grupos in (("Por dificultad", dificultades), ("Por categoría", categorias)):
+        print("")
+        print("  " + titulo)
+        for g in grupos:
+            a, b = antes["por_grupo"].get(g, 0.0), despues["por_grupo"][g]
+            fila("  " + _nombre_grupo(g), a, b)
+            if g.startswith("cat:") and b - a < -0.005:
+                bajan.append(_nombre_grupo(g))
+    print("")
+    if bajan and despues["score_global"] > antes["score_global"]:
+        print("  OJO: la nota global sube, pero baja: %s." % ", ".join(bajan))
+    elif bajan:
+        print("  Baja la nota global y también: %s." % ", ".join(bajan))
+    else:
+        print("  Ninguna categoría baja.")

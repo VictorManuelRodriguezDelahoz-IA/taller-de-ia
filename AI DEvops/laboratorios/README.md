@@ -41,7 +41,7 @@ gateway. Anade los precios vigentes de ese modelo al diccionario `PRECIOS` de
 | Notebook | Sesion | Al terminar tienes |
 |---|---|---|
 | `Sesion_1_Fundamentos_y_Arquitectura.ipynb` | Fundamentos y arquitectura | Bucle con frenos, grafo con estado y gateway con ruteo en cascada |
-| `Sesion_2_Prompts_y_Evaluacion.ipynb` | Prompts y evaluacion | Set dorado auditado, 4 metricas y un runner que da un puntaje reproducible |
+| `Sesion_2_Prompts_y_Evaluacion.ipynb` | Prompts y evaluacion | Corregir un examen de 40 tickets, comparar versiones de prompt, romper una a proposito y medir las manias del juez LLM |
 | `Sesion_3_CICD_y_Observabilidad.ipynb` | CI/CD y observabilidad | Trazas con esquema, un gate que bloquea de verdad, canario y rollback |
 | `Sesion_4_Costo_Latencia_Resiliencia.ipynb` | Costo, latencia y resiliencia | Costo por tenant, tres capas de cache y un fallback probado |
 | `Sesion_5_Seguridad_y_Operacion.ipynb` | Seguridad y operacion | Red team de 15 casos y un runbook con responsables |
