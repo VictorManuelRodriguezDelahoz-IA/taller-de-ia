@@ -14,6 +14,8 @@ jupyter notebook
 
 Y abre `notebooks/Sesion_1_Fundamentos_y_Arquitectura.ipynb`.
 
+> **Windows:** clona el repo en una carpeta de ruta corta (por ejemplo `C:\taller`). En carpetas muy anidadas `pip` puede fallar por el limite de longitud de rutas.
+
 **No hace falta API key ni tarjeta**: los laboratorios traen un proveedor simulado que
 imita el comportamiento de un LLM real (no determinismo, formato roto, alucinacion,
 costo, latencia, fallos e inyeccion de prompt). Ver `laboratorios/README.md`.

@@ -101,6 +101,11 @@ notebooks siguen funcionando.
 
 ## Preguntas frecuentes
 
+**`pip install` falla en Windows** con `No such file or directory` o un aviso de
+*Long Path*. Es el limite de 260 caracteres de las rutas de Windows: clona el repo en una
+carpeta corta (por ejemplo `C:\taller`) y vuelve a instalar. `python verificar_entorno.py`
+te avisa si la instalacion quedo a medias.
+
 **No tengo Jupyter.** Abre la carpeta en VS Code con la extension de Python: los
 `.ipynb` se ejecutan directamente. O corre los `_fuente/*.py` desde la terminal.
 

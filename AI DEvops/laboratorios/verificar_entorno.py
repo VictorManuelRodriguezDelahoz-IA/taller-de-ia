@@ -41,6 +41,21 @@ if L:
     except Exception as e:
         fallos.append("la llamada simulada fallo: %s" % e)
 
+# Jupyter: sin ipykernel no se puede abrir ningun notebook, ni en Jupyter ni en VS Code.
+try:
+    import ipykernel  # noqa: F401
+    print("%-18s ok" % "ipykernel:")
+except ImportError:
+    fallos.append("falta ipykernel: 'pip install -r requirements.txt' no termino bien. "
+                  "Revisa el error de pip (en Windows, suele ser la ruta demasiado larga: "
+                  "clona el repo en una carpeta corta, por ejemplo C:/taller).")
+    print("%-18s FALTA" % "ipykernel:")
+try:
+    import notebook  # noqa: F401
+    print("%-18s ok" % "jupyter notebook:")
+except ImportError:
+    print("%-18s no instalado (solo hace falta si no usas VS Code)" % "jupyter notebook:")
+
 for extra in ("pandas", "tiktoken", "openai", "anthropic"):
     try:
         __import__(extra)
