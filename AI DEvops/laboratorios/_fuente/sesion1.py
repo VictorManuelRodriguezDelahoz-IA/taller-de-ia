@@ -124,7 +124,7 @@ def respuesta_mayoritaria(prompt, n=10, temperatura=0.7):
     return cat, v, n
 
 print(respuesta_mayoritaria(prompt))
-# Esperado cuando lo resuelvas: ('aplicacion', ~7-10, 10)
+# Esperado cuando lo resuelvas: ('aplicacion', normalmente entre 5 y 9 votos, 10)
 
 # %% [markdown]
 # ---
@@ -454,30 +454,33 @@ print("\nrecorrido (caso de seguridad):", " -> ".join(s2.recorrido))
 # Regla de la sesion: **ninguna parte del codigo llama al proveedor directamente**.
 # Todo pasa por un punto unico. Y una vez que existe ese punto, puedes rutear:
 # el modelo pequeno atiende lo facil, el grande solo ve lo que el pequeno no pudo.
+#
+# > Aqui usamos el prompt base (v1) a proposito: con el v2 el modelo pequeno ya acierta
+# > casi todo y no queda nada que rutear. A veces el mejor router es un mejor prompt.
 
 # %%
 L.limpiar_trazas()
 casos = L.cargar_golden()
-plantilla_v2 = L.cargar_prompt("clasificar_incidente.v2.yaml")["plantilla"]
+plantilla_router = L.cargar_prompt("clasificar_incidente.v1.yaml")["plantilla"]   # ver la nota de arriba
 
-def gateway(ticket, estrategia="cascada", umbral=0.75):
+def gateway(ticket, estrategia="cascada", umbral=0.60):
     """Punto unico de salida. Aqui viven ruteo, registro y (mas adelante) cache y fallback."""
-    pr = L.render(plantilla_v2, ticket=ticket)
+    pr = L.render(plantilla_router, ticket=ticket)
     if estrategia == "solo_pequeno":
-        r = chat(pr, modelo="sim-small", formato_json=True, prompt_id="clasificar:v2")
+        r = chat(pr, modelo="sim-small", formato_json=True, prompt_id="clasificar:v1")
         return r.json(), r.costo_usd, "sim-small"
     if estrategia == "solo_grande":
-        r = chat(pr, modelo="sim-large", formato_json=True, prompt_id="clasificar:v2")
+        r = chat(pr, modelo="sim-large", formato_json=True, prompt_id="clasificar:v1")
         return r.json(), r.costo_usd, "sim-large"
     # cascada
-    r = chat(pr, modelo="sim-small", formato_json=True, prompt_id="clasificar:v2")
+    r = chat(pr, modelo="sim-small", formato_json=True, prompt_id="clasificar:v1")
     d, costo = r.json(), r.costo_usd
     if d.get("confianza", 0) >= umbral:
         return d, costo, "sim-small"
-    r2 = chat(pr, modelo="sim-large", formato_json=True, prompt_id="clasificar:v2")
+    r2 = chat(pr, modelo="sim-large", formato_json=True, prompt_id="clasificar:v1")
     return r2.json(), costo + r2.costo_usd, "sim-large"
 
-def evaluar(estrategia, umbral=0.75):
+def evaluar(estrategia, umbral=0.60):
     ok = costo = 0.0
     escalados = 0
     for c in casos:
@@ -490,7 +493,7 @@ def evaluar(estrategia, umbral=0.75):
             "costo_1000_req_usd": round(costo / len(casos) * 1000, 3),
             "% al modelo grande": "%.0f%%" % (100 * escalados / len(casos))}
 
-tabla([evaluar("solo_pequeno"), evaluar("solo_grande"), evaluar("cascada", 0.75)])
+tabla([evaluar("solo_pequeno"), evaluar("solo_grande"), evaluar("cascada", 0.60)])
 
 # %% [markdown]
 # ### EJERCICIO 6
@@ -502,7 +505,7 @@ tabla([evaluar("solo_pequeno"), evaluar("solo_grande"), evaluar("cascada", 0.75)
 # Por eso la tabla trae siempre las dos columnas juntas.
 
 # %%
-tabla([evaluar("cascada", u) for u in (0.50, 0.65, 0.75, 0.85, 0.95)])
+tabla([evaluar("cascada", u) for u in (0.50, 0.60, 0.70, 0.75, 0.85)])
 # TODO: escribe aqui abajo el umbral que elegirias para TU caso y por que.
 DECISION = "umbral = ?  porque ..."
 

@@ -127,15 +127,34 @@ print("GATE:", "PASA" if pasa else "BLOQUEA", motivos)
 # ### Por que `runs_per_case`
 #
 # Con una sola pasada mides **ruido**, no calidad. Compruebalo: corre el mismo prompt
-# con 1 pasada varias veces y mira cuanto se mueve el puntaje.
+# con 1 pasada varias veces y mira cuanto se mueve el puntaje. Usamos temperature 0.3:
+# con 0, el simulador casi no varia y no habria ruido que promediar.
 
 # %%
-sueltos = [correr_eval(cfg["prompt"], runs_por_caso=1)["score_global"] for _ in range(4)]
-promediados = [correr_eval(cfg["prompt"], runs_por_caso=3)["score_global"] for _ in range(2)]
-print("con 1 pasada :", sueltos, " -> rango %.3f" % (max(sueltos) - min(sueltos)))
-print("con 3 pasadas:", promediados, " -> rango %.3f" % (max(promediados) - min(promediados)))
-print("\nSi tu umbral esta a menos de un rango de distancia del puntaje, tu gate")
-print("va a bloquear cambios buenos y dejar pasar malos. Sube runs_per_case.")
+velocidad_original, L.VELOCIDAD_SIM = L.VELOCIDAD_SIM, 0     # esta celda no espera latencias
+
+def con_temperatura(ticket, p, temp=0.3):
+    r = chat(L.render(p["plantilla"], ticket=ticket), modelo=p["modelo"],
+             temperature=temp, formato_json=True, registrar=False)
+    return r.json(), r.costo_usd
+
+sueltos = [correr_eval(cfg["prompt"], runs_por_caso=1, gateway=con_temperatura)["score_global"]
+           for _ in range(12)]
+promediados = [correr_eval(cfg["prompt"], runs_por_caso=3, gateway=con_temperatura)["score_global"]
+               for _ in range(12)]
+L.VELOCIDAD_SIM = velocidad_original
+
+r1, r3 = max(sueltos) - min(sueltos), max(promediados) - min(promediados)
+print("12 evals con 1 pasada :", [round(x, 3) for x in sueltos], "-> rango %.3f" % r1)
+print("12 evals con 3 pasadas:", [round(x, 3) for x in promediados], "-> rango %.3f" % r3)
+print("")
+if r3 < r1:
+    print("Mismo prompt y mismo set: con 1 pasada el puntaje baila %.3f; promediando 3, %.3f." % (r1, r3))
+    print("Si tu umbral esta a menos de ese rango del puntaje, el gate bloquea cambios buenos")
+    print("y deja pasar malos. Por eso runs_per_case: 3.")
+else:
+    print("Esta vez el azar no lo dejo ver. Vuelve a ejecutar la celda: de media, promediar")
+    print("3 pasadas deja el puntaje casi el doble de estable que una sola.")
 
 # %% [markdown]
 # ---

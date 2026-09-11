@@ -331,7 +331,8 @@ print("Juez ingenuo, la buena siempre en B: acuerdo con el humano = %.0f%%" % (1
 # 3. decirle que **el orden es aleatorio** para neutralizar la posicion
 # 4. darle la **respuesta de referencia** (`Respuesta de referencia: ...`)
 #
-# Objetivo: pasar del ~50% al **>= 80%** de acuerdo, en los dos ordenes.
+# Objetivo: **>= 80% de acuerdo en los dos ordenes**. El juez ingenuo se queda muy lejos
+# en al menos uno de ellos.
 
 # %%
 RUBRICA_BUENA = """Eres un juez de calidad. Criterio unico: que respuesta coincide mejor
