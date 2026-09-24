@@ -4,3 +4,4 @@ __pycache__/
 .ipynb_checkpoints/
 .env
 resultados/runbook.md
+resultados/trazas_*.jsonl

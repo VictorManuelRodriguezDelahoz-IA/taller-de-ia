@@ -45,6 +45,8 @@ gateway. Anade los precios vigentes de ese modelo al diccionario `PRECIOS` de
 | `Sesion_3_CICD_y_Observabilidad.ipynb` | CI/CD y observabilidad | Trazas con esquema, un gate que bloquea de verdad, canario y rollback |
 | `Sesion_4_Costo_Latencia_Resiliencia.ipynb` | Costo, latencia y resiliencia | Costo por tenant, tres capas de cache y un fallback probado |
 | `Sesion_5_Seguridad_y_Operacion.ipynb` | Seguridad y operacion | Red team de 15 casos y un runbook con responsables |
+| `Lab_IA_para_DevOps.ipynb` | IA en el día a día de DevOps (1 hora) | Tres casos con un modelo real vía OpenRouter: diagnosticar un pipeline roto, revisar un plan de Terraform y un agente de guardia con herramientas de Kubernetes de solo lectura. Necesita `OPENROUTER_API_KEY` en `.env`; sin clave usa respuestas guardadas de una ejecución real |
+| `Proyecto_Final_Copiloto_DevOps.ipynb` | Proyecto final: todo junto (2 horas) | Un bot que recibe cualquier evento y lo atiende: router en cascada con modelos abiertos, diagnóstico de un log de CI **real** bajado con `gh`, revisión de un `terraform plan` **real**, agente con servidor MCP, enmascarado de secretos, evaluación con set dorado, gate y costo por evento. `gh` y `terraform` son opcionales: sin ellos usa datos guardados |
 
 Cada notebook dura entre 45 y 70 minutos si se hacen los ejercicios. Se pueden correr
 de forma independiente: **no hace falta haber terminado el anterior**.
@@ -54,6 +56,11 @@ de forma independiente: **no hace falta haber terminado el anterior**.
 ```
 laboratorios/
   lab_utils.py                el proveedor simulado, el conteo de tokens, costo y trazas
+  devops_ia.py                datos del laboratorio de IA para DevOps (log de CI, plan de Terraform, cluster)
+  copiloto.py                 kit del proyecto final: secretos, inyeccion, servidor MCP, set dorado y trazas
+  eval.py                     el gate del proyecto final, para correr en CI (exit 1 si baja la calidad)
+  terraform_demo/             modulo de Terraform con providers locales, para correr un plan de verdad
+  aiops.py                    tarjetas, tablas y graficos que usa ese laboratorio
   evaluador.py                el runner de evaluacion (se construye en la Sesion 2)
   ci_eval.py                  el comando que corre en CI y devuelve exit code 1
   gate.yaml                   los umbrales del gate. El contrato del equipo

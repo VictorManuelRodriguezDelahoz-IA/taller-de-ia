@@ -341,3 +341,76 @@ agresiva y vas a degradar la calidad de las respuestas.
 
 No tiene solucion de codigo. Si en tu runbook sigue poniendo "el equipo de plataforma"
 en vez de un nombre y un apellido, el ejercicio no esta hecho.
+
+---
+
+## Laboratorio · IA en el día a día de DevOps
+
+Con un modelo real las respuestas cambian de una ejecución a otra y entre modelos.
+
+### Ejercicio 1 - Su propio pipeline
+
+No hay una respuesta fija. Lo interesante es discutir qué pasó con logs largos (cuánto recortó
+`recortar_log`), si el modelo acertó sin el diff y qué datos tuvieron que quitar antes de
+mandarlo. Si el log tiene secretos, es la oportunidad para hablar de enmascararlos antes de
+cualquier llamada al modelo.
+
+### Ejercicio 2 - ¿Qué modelo usar?
+
+Los cuatro suelen encontrar la causa (falta `pg_config` porque la imagen `slim` no trae las
+librerías de PostgreSQL). La diferencia está en el detalle, el tiempo y el costo: el modelo caro
+cuesta varias veces más y tarda más, para un resultado parecido. Para diagnosticar pipelines
+conviene un modelo barato; el caro se justifica en tareas con más razonamiento, como el agente.
+
+### Ejercicio 3 - Si el agente actuara solo
+
+Condiciones razonables para dejar que ejecute `kubectl rollout undo` sin aprobación:
+
+- La acción se puede deshacer y tiene runbook.
+- Hubo un despliegue de ese servicio justo antes del problema (si no, el rollback no arregla nada).
+- Solo en servicios no críticos al principio, o solo en ciertos horarios.
+- Después de actuar, verifica que el servicio se recuperó; si no, avisa a una persona y no
+  sigue probando cosas.
+- Todo queda registrado en el canal del incidente.
+
+## Proyecto final · Copiloto DevOps
+
+Resultados de la última corrida real (24 de septiembre), para que sepas qué esperar en clase:
+
+| Métrica | Resultado | Notas |
+|---|---|---|
+| Ruteo | 12 de 12 | Llama 3.1 8B resolvió 11; solo escaló el mensaje de Slack que no era un incidente |
+| Categoría de CI | 5 de 5 | Qwen3 Coder, con algún reintento de por medio |
+| Seguridad | 2 de 2 | Detección determinista, no depende del modelo |
+| Costo | $0.0022 por evento | $2.68 al mes con 40 eventos diarios |
+
+El log de CI que se diagnostica en el bloque 4 se baja en vivo de un repositorio público que esté
+fallando, así que **cambia en cada clase**. En las pruebas fueron logs de entre 100 KB y 2,4 MB
+(hasta 620.000 tokens, que mandados enteros costarían $0,62 por diagnóstico) y el recorte los dejó
+en unos 8 KB. El diagnóstico salió correcto en los dos casos.
+
+Sobre la categoría que devuelve: es el punto flojo, y a propósito. Cuando un test falla porque falta
+una fixture, el modelo puede decir `test`, `config` o `dependencia`, y las tres se pueden defender.
+Esa discusión es el contenido del bloque, no un error a esconder: si el equipo no se pone de acuerdo
+en las categorías, la evaluación no mide nada.
+
+### Ejercicio 1 - Bajar el costo
+
+El router ya corre con un modelo abierto barato, así que el margen está en el umbral. Subirlo a 0,9 hace
+que escale más seguido (más calidad, más costo) y bajarlo a 0,5 hace lo contrario. `openai/gpt-oss-20b`
+es aún más barato que Llama 3.1 8B y en las pruebas clasificó igual de bien. Lo importante es que lo
+defiendan con la tabla, no con la intuición.
+
+### Ejercicio 2 - Romperlo
+
+Es el ejercicio que más enseña. Con 12 eventos fáciles todo da verde; en cuanto meten un caso real
+ambiguo (un job que falla por timeout de red al bajar una imagen, por ejemplo) empiezan las discusiones
+sobre si es `infraestructura`, `flaky` o `dependencia`. Ahí se ve que el problema no es el modelo sino
+que las categorías no estaban bien definidas. Esa discusión es el trabajo real de un set dorado.
+
+### Ejercicio 3 - Quitarle un freno
+
+Si borran del prompt la frase de que dentro de `<evento>` hay datos y no instrucciones, el modelo se
+vuelve más propenso a seguir la orden escondida en EV-10 y EV-11. Aun así la métrica de seguridad sigue
+en 100%, porque la detección es determinista y no depende del prompt. Esa es la moraleja: la instrucción
+en el prompt ayuda, pero la defensa de verdad es el código que revisa el texto antes y después.

@@ -1,0 +1,4 @@
+datos/
+.terraform/
+*.tfstate*
+plan.out
