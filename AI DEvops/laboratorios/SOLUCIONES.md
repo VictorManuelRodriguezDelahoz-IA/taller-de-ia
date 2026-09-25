@@ -394,23 +394,21 @@ una fixture, el modelo puede decir `test`, `config` o `dependencia`, y las tres 
 Esa discusión es el contenido del bloque, no un error a esconder: si el equipo no se pone de acuerdo
 en las categorías, la evaluación no mide nada.
 
-### Ejercicio 1 - Bajar el costo
+### Para discutir en clase
 
-El router ya corre con un modelo abierto barato, así que el margen está en el umbral. Subirlo a 0,9 hace
-que escale más seguido (más calidad, más costo) y bajarlo a 0,5 hace lo contrario. `openai/gpt-oss-20b`
-es aún más barato que Llama 3.1 8B y en las pruebas clasificó igual de bien. Lo importante es que lo
-defiendan con la tabla, no con la intuición.
+No hay ejercicio con respuesta en este notebook: el proyecto se recorre entero y lo que queda son
+tres discusiones que valen más que cualquier TODO.
 
-### Ejercicio 2 - Romperlo
+**La categoría del fallo de CI.** Cuando un test se cae porque falta una fixture, el modelo puede
+decir `test`, `config` o `dependencia`, y las tres se pueden defender. Si el equipo no se pone de
+acuerdo, la evaluación no mide nada. Esa es la parte difícil de un set dorado, y no la resuelve el
+modelo.
 
-Es el ejercicio que más enseña. Con 12 eventos fáciles todo da verde; en cuanto meten un caso real
-ambiguo (un job que falla por timeout de red al bajar una imagen, por ejemplo) empiezan las discusiones
-sobre si es `infraestructura`, `flaky` o `dependencia`. Ahí se ve que el problema no es el modelo sino
-que las categorías no estaban bien definidas. Esa discusión es el trabajo real de un set dorado.
+**Hasta dónde dejar actuar al agente.** Hoy propone y espera aprobación. Para dejarlo ejecutar el
+`kubectl rollout undo` solo, lo razonable es exigir: que la acción se pueda deshacer, que haya
+runbook, que el despliegue sea reciente, que el servicio no sea crítico, y que después verifique si
+se recuperó y avise a una persona si no.
 
-### Ejercicio 3 - Quitarle un freno
-
-Si borran del prompt la frase de que dentro de `<evento>` hay datos y no instrucciones, el modelo se
-vuelve más propenso a seguir la orden escondida en EV-10 y EV-11. Aun así la métrica de seguridad sigue
-en 100%, porque la detección es determinista y no depende del prompt. Esa es la moraleja: la instrucción
-en el prompt ayuda, pero la defensa de verdad es el código que revisa el texto antes y después.
+**Qué modelo usar dónde.** El pequeño abierto resuelve el ruteo por veinte veces menos plata; el
+grande se justifica en el agente, que es lo que más razonamiento pide. Con la tabla de trazas a la
+vista, la conversación deja de ser de opiniones.

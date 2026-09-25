@@ -7,7 +7,7 @@
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 16,
+   "tokens_entrada": 41,
    "tokens_salida": 8
   }
  ],
@@ -15,17 +15,17 @@
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"tienda-checkout\", \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": null, \"confianza\": 1.0}",
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 250,
-   "tokens_salida": 30
+   "tokens_entrada": 226,
+   "tokens_salida": 26
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"pagos-api\", \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"pagos-api\", \"confianza\": 0.9}",
     "refusal": null,
     "reasoning": null
    },
@@ -35,7 +35,7 @@
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"web-app\", \"confianza\": 0.9}",
+    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"web-app\", \"confianza\": 1.0}",
     "refusal": null,
     "reasoning": null
    },
@@ -45,22 +45,12 @@
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"null\", \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"github-actions\", \"confianza\": 1.0}",
     "refusal": null,
     "reasoning": null
    },
    "tokens_entrada": 222,
-   "tokens_salida": 27
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"pr_terraform\", \"servicio\": \"null\", \"confianza\": 1.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 236,
-   "tokens_salida": 26
+   "tokens_salida": 28
   },
   {
    "mensaje": {
@@ -69,28 +59,38 @@
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 231,
+   "tokens_entrada": 237,
    "tokens_salida": 28
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"pr_terraform\", \"servicio\": \"null\", \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"pr_terraform\", \"servicio\": \"infra-prod\", \"confianza\": 1.0}",
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 246,
-   "tokens_salida": 26
+   "tokens_entrada": 232,
+   "tokens_salida": 28
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"alerta\", \"servicio\": \"checkout\", \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"pr_terraform\", \"servicio\": \"infra-prod\", \"confianza\": 1.0}",
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 222,
-   "tokens_salida": 25
+   "tokens_entrada": 246,
+   "tokens_salida": 28
+  },
+  {
+   "mensaje": {
+    "role": "assistant",
+    "content": "{\"tipo\": \"alerta\", \"servicio\": \"tienda\", \"confianza\": 1.0}",
+    "refusal": null,
+    "reasoning": null
+   },
+   "tokens_entrada": 223,
+   "tokens_salida": 26
   },
   {
    "mensaje": {
@@ -119,13 +119,13 @@
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 257,
+   "tokens_entrada": 256,
    "tokens_salida": 28
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"otro\", \"servicio\": \"null\", \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"otro\", \"servicio\": \"null\", \"confianza\": 0.0}",
     "refusal": null,
     "reasoning": null
    },
@@ -135,17 +135,17 @@
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": null, \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"tienda-checkout\", \"confianza\": 1.0}",
     "refusal": null,
     "reasoning": null
    },
    "tokens_entrada": 225,
-   "tokens_salida": 26
+   "tokens_salida": 30
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"pagos-api\", \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"pagos-api\", \"confianza\": 0.9}",
     "refusal": null,
     "reasoning": null
    },
@@ -155,17 +155,17 @@
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"web-app\", \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"null\", \"confianza\": 1.0}",
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 251,
-   "tokens_salida": 28
+   "tokens_entrada": 226,
+   "tokens_salida": 27
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"null\", \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"null\", \"confianza\": 0.9}",
     "refusal": null,
     "reasoning": null
    },
@@ -219,7 +219,7 @@
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 223,
+   "tokens_entrada": 222,
    "tokens_salida": 26
   },
   {
@@ -231,76 +231,6 @@
    },
    "tokens_entrada": 255,
    "tokens_salida": 28
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"pr_terraform\", \"servicio\": null, \"confianza\": 1.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 256,
-   "tokens_salida": 25
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"otro\", \"servicio\": \"null\", \"confianza\": 0.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 212,
-   "tokens_salida": 25
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"tienda-checkout\", \"confianza\": 1.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 225,
-   "tokens_salida": 30
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"pagos-api\", \"confianza\": 1.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 235,
-   "tokens_salida": 29
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"web-app\", \"confianza\": 1.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 227,
-   "tokens_salida": 28
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"null\", \"confianza\": 0.9}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 222,
-   "tokens_salida": 27
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"pr_terraform\", \"servicio\": \"null\", \"confianza\": 1.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 236,
-   "tokens_salida": 26
   },
   {
    "mensaje": {
@@ -309,165 +239,115 @@
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 232,
+   "tokens_entrada": 257,
    "tokens_salida": 28
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\"tipo\": \"pr_terraform\", \"servicio\": \"null\", \"confianza\": 1.0}",
+    "content": "{\"tipo\": \"otro\", \"servicio\": null, \"confianza\": 0.0}",
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 246,
-   "tokens_salida": 26
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"alerta\", \"servicio\": \"tienda\", \"confianza\": 1.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 223,
-   "tokens_salida": 26
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"alerta\", \"servicio\": \"auth-api\", \"confianza\": 1.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 247,
-   "tokens_salida": 26
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"ci_fallido\", \"servicio\": \"github-actions\", \"confianza\": 1.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 255,
-   "tokens_salida": 28
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"pr_terraform\", \"servicio\": \"infra-prod\", \"confianza\": 0.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 256,
-   "tokens_salida": 28
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\"tipo\": \"otro\", \"servicio\": \"null\", \"confianza\": 0.0}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 212,
-   "tokens_salida": 25
+   "tokens_entrada": 213,
+   "tokens_salida": 24
   }
  ],
  "ruta ci|qwen/qwen3-coder-30b-a3b-instruct": [
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\n  \"categoria\": \"test\",\n  \"causa\": \"Varios tests fallan debido a aserciones incorrectas y uso de métodos obsoletos para obtener dispositivos en el registro.\",\n  \"arreglo\": \"Actualizar los tests para usar los nuevos métodos de `device_registry` como `async_get_device_by_identifier` en lugar de `async_get_device`. Además, revisar y corregir las aserciones que fallan en los tests de binario, cubierta, sensores y botones.\",\n  \"reintentar\": false\n}",
+    "content": "{\n  \"categoria\": \"test\",\n  \"causa\": \"Los tests fallan porque las llamadas a mock_update no se están registrando correctamente, lo que hace que el contador de llamadas sea 0 en lugar de 1.\",\n  \"arreglo\": \"Revisar la configuración del mock para asegurar que 'update' sea llamado correctamente durante la simulación del error de autenticación. Verificar que el objeto API esté correctamente inyectado y que el mock esté siendo aplicado en el contexto adecuado.\",\n  \"reintentar\": false\n}",
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 2446,
-   "tokens_salida": 121
+   "tokens_entrada": 2174,
+   "tokens_salida": 123
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\n  \"categoria\": \"dependencia\",\n  \"causa\": \"No se encontró el ejecutable pg_config al intentar instalar psycopg2 durante la construcción de la imagen Docker.\",\n  \"arreglo\": \"Instalar la dependencia postgresql-dev o libpq-dev en la imagen base antes de instalar psycopg2. Por ejemplo, agregar 'RUN apt-get update && apt-get install -y postgresql-dev' al Dockerfile.\",\n  \"reintentar\": false\n}",
+    "content": "{\n  \"categoria\": \"dependencia\",\n  \"causa\": \"No se encontró el ejecutable pg_config al intentar instalar psycopg2 durante el build de Docker\",\n  \"arreglo\": \"Agregar las dependencias necesarias para compilar psycopg2 en el Dockerfile, específicamente libpq-dev y python3-dev (o sus equivalentes según la imagen base)\",\n  \"reintentar\": false\n}",
     "refusal": null,
     "reasoning": null
    },
    "tokens_entrada": 294,
-   "tokens_salida": 100
+   "tokens_salida": 87
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": null,
+    "content": "{\n  \"categoria\": \"flaky\",\n  \"causa\": \"El test test_conciliacion_pagos falló con un ConnectionError: Connection reset by peer, lo cual es un error intermitente.\",\n  \"arreglo\": \"Se debe implementar un mecanismo de reintentar la solicitud HTTP en caso de fallos de conexión intermitentes. También se puede aumentar el tiempo de espera de la conexión.\",\n  \"reintentar\": true\n}",
     "refusal": null,
     "reasoning": null
    },
    "tokens_entrada": 305,
-   "tokens_salida": 95
+   "tokens_salida": 99
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\n  \"categoria\": \"credenciales\",\n  \"causa\": \"El token de acceso de AWS ha expirado durante la actualización del servicio ECS.\",\n  \"arreglo\": \"Renovar o regenerar las credenciales de AWS (AWS_ACCESS_KEY_ID y AWS_SECRET_ACCESS_KEY) con permisos adecuados para ECS. Verificar que el token no haya caducado en el almacén de secretos del CI/CD.\",\n  \"reintentar\": false\n}",
+    "content": "{\n  \"categoria\": \"credenciales\",\n  \"causa\": \"El token de acceso de AWS ha expirado durante la actualización del servicio ECS.\",\n  \"arreglo\": \"Renovar las credenciales de AWS en las variables de entorno del workflow o regenerar las claves de acceso con permisos adecuados para ECS.\",\n  \"reintentar\": false\n}",
     "refusal": null,
     "reasoning": null
    },
    "tokens_entrada": 295,
-   "tokens_salida": 105
+   "tokens_salida": 84
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\n  \"categoria\": \"infraestructura\",\n  \"causa\": \"El proceso de construcción fue eliminado con código de salida 137, probablemente por falta de memoria en el runner.\",\n  \"arreglo\": \"Aumentar los recursos del runner o optimizar el proceso de build para usar menos memoria. Se puede probar con un runner de mayor capacidad o implementar límites de memoria en el proceso de build.\",\n  \"reintentar\": false\n}",
+    "content": "{\n  \"categoria\": \"infraestructura\",\n  \"causa\": \"El proceso de construcción fue eliminado con código de salida 137, lo que indica que se agotó la memoria del runner.\",\n  \"arreglo\": \"Aumentar los recursos del runner asignando más memoria o optimizar el proceso de build para usar menos memoria.\",\n  \"reintentar\": false\n}",
     "refusal": null,
     "reasoning": null
    },
    "tokens_entrada": 293,
-   "tokens_salida": 99
+   "tokens_salida": 83
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\n  \"categoria\": \"test\",\n  \"causa\": \"Un test falló por una aserción que esperaba 20.0 pero recibió 19.99\",\n  \"arreglo\": \"Revisar la lógica del cálculo de descuentos en el código para corregir la precisión del valor esperado o ajustar el test para aceptar un margen de error.\",\n  \"reintentar\": false\n}",
+    "content": "{\n  \"categoria\": \"test\",\n  \"causa\": \"Un test falla porque el valor esperado no coincide con el valor obtenido en la prueba de descuentos.\",\n  \"arreglo\": \"Revisar la lógica del cálculo de descuentos en el código para asegurar que el resultado sea 20.0 como se espera en la prueba.\",\n  \"reintentar\": false\n}",
     "refusal": null,
     "reasoning": null
    },
    "tokens_entrada": 326,
-   "tokens_salida": 99
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\n  \"categoria\": \"dependencia\",\n  \"causa\": \"No se encontró el ejecutable pg_config al intentar instalar psycopg2 durante el build de Docker\",\n  \"arreglo\": \"Agregar las dependencias necesarias para compilar psycopg2 en el Dockerfile, específicamente libpq-dev y python3-dev\",\n  \"reintentar\": false\n}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 294,
-   "tokens_salida": 78
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": null,
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 305,
-   "tokens_salida": 95
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": null,
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 295,
    "tokens_salida": 90
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\n  \"categoria\": \"infraestructura\",\n  \"causa\": \"El proceso de construcción fue eliminado con código de salida 137, lo que indica que se agotó la memoria del runner.\",\n  \"arreglo\": \"Aumentar los recursos del runner asignando más memoria o optimizar el proceso de build para usar menos memoria. Se puede probar con un runner de mayor capacidad como ubuntu-latest con más RAM.\",\n  \"reintentar\": false\n}",
+    "content": null,
+    "refusal": null,
+    "reasoning": null
+   },
+   "tokens_entrada": 294,
+   "tokens_salida": 80
+  },
+  {
+   "mensaje": {
+    "role": "assistant",
+    "content": "{\n  \"categoria\": \"flaky\",\n  \"causa\": \"El test test_conciliacion_pagos falló con un ConnectionResetByPeer, lo cual es un error intermitente.\",\n  \"arreglo\": \"Se debe implementar un mecanismo de reintentar la solicitud HTTP en caso de ConnectionResetByPeer o usar un backoff retry con pytest.\",\n  \"reintentar\": true\n}",
+    "refusal": null,
+    "reasoning": null
+   },
+   "tokens_entrada": 305,
+   "tokens_salida": 88
+  },
+  {
+   "mensaje": {
+    "role": "assistant",
+    "content": "{\n  \"categoria\": \"credenciales\",\n  \"causa\": \"El token de acceso de AWS ha expirado durante la actualización del servicio ECS.\",\n  \"arreglo\": \"Renovar las credenciales de AWS en las variables de entorno del workflow. Verificar que el rol o usuario tenga permisos adecuados y que las credenciales estén actualizadas.\",\n  \"reintentar\": false\n}",
+    "refusal": null,
+    "reasoning": null
+   },
+   "tokens_entrada": 295,
+   "tokens_salida": 92
+  },
+  {
+   "mensaje": {
+    "role": "assistant",
+    "content": "{\n  \"categoria\": \"infraestructura\",\n  \"causa\": \"El proceso de construcción fue eliminado con código de salida 137, indicando que se agotó la memoria del runner.\",\n  \"arreglo\": \"Aumentar los recursos del runner o optimizar el proceso de construcción para usar menos memoria. Se puede probar con un runner de mayor capacidad o implementar configuraciones de memoria en el proceso de build.\",\n  \"reintentar\": false\n}",
     "refusal": null,
     "reasoning": null
    },
@@ -477,74 +357,24 @@
   {
    "mensaje": {
     "role": "assistant",
-    "content": null,
+    "content": "{\n  \"categoria\": \"test\",\n  \"causa\": \"Un test falló por una aserción que comprueba una diferencia de precio menor a 0.01, lo cual es un comportamiento esperado en este caso.\",\n  \"arreglo\": \"Revisar la lógica del test para asegurar que la comparación de precios tenga un margen de tolerancia adecuado o ajustar el valor esperado según la implementación actual.\",\n  \"reintentar\": false\n}",
     "refusal": null,
     "reasoning": null
    },
    "tokens_entrada": 326,
-   "tokens_salida": 96
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\n  \"categoria\": \"dependencia\",\n  \"causa\": \"No se encontró el ejecutable pg_config al intentar instalar psycopg2 durante la construcción de la imagen Docker.\",\n  \"arreglo\": \"Instalar la dependencia development package para PostgreSQL en la imagen Docker antes de instalar psycopg2. Por ejemplo, agregar `RUN apt-get update && apt-get install -y libpq-dev python3-dev` al Dockerfile.\",\n  \"reintentar\": false\n}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 294,
-   "tokens_salida": 100
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": null,
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 305,
-   "tokens_salida": 95
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\n  \"categoria\": \"credenciales\",\n  \"causa\": \"El token de acceso de AWS ha expirado durante la actualización del servicio ECS.\",\n  \"arreglo\": \"Renovar las credenciales de AWS en las variables de entorno del workflow, asegurándose de que las claves tengan una fecha de vencimiento válida o regenerarlas si han caducado.\",\n  \"reintentar\": false\n}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 295,
-   "tokens_salida": 96
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": null,
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 293,
-   "tokens_salida": 103
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\n  \"categoria\": \"test\",\n  \"causa\": \"Un test falla porque el valor esperado no coincide con el valor obtenido en la prueba de descuentos.\",\n  \"arreglo\": \"Revisar la lógica del cálculo de descuentos o actualizar el valor esperado en el test para que coincida con el resultado real.\",\n  \"reintentar\": false\n}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 326,
-   "tokens_salida": 86
+   "tokens_salida": 106
   }
  ],
  "ruta terraform|anthropic/claude-haiku-4.5": [
   {
    "mensaje": {
     "role": "assistant",
-    "content": "```json\n{\n  \"resumen\": \"Este PR cifra la base de datos de pedidos (requiere recrearla) y abre SSH del bastión a internet. También expande permisos IAM, habilita versionado en S3 y aumenta retención de logs.\",\n  \"riesgos_adicionales\": [\n    {\n      \"recurso\": \"aws_db_instance.pedidos\",\n      \"riesgo\": \"Downtime durante recreación: cambio de instance_class de db.r6g.large a db.t3.medium reduce capacidad de memoria (40% menos) sin plan de migración de datos visible\",\n      \"severidad\": \"alta\"\n    },\n    {\n      \"recurso\": \"aws_iam_role_policy.ci_deploy\",\n      \"riesgo\": \"iam:PassRole permite al CI asumir cualquier rol IAM, escalando privilegios más allá de ECR/ECS\",\n      \"severidad\": \"alta\"\n    },\n    {\n      \"recurso\": \"aws_security_group_rule.bastion_ssh\",\n      \"riesgo\": \"Sin restricción de IP: cualquiera en internet puede intentar acceso SSH al bastión de producción\",\n      \"severidad\": \"alta\"\n    }\n  ],\n  \"preguntas\": [\n    \"¿Por qué se reduce la instance_class de db.r6g.large a db.t3.medium? ¿Se validó que t3.medium soporta la carga actual de pedidos?\",\n    \"¿El SSH abierto a 0.0.0.0/0 es intencional o debería restringirse a IPs específicas de tu infraestructura?\",\n    \"¿Existe un plan de rollback si la recreación de la BD falla o causa pérdida de datos con skip_final_snapshot=true?\"\n  ]\n}\n```",
+    "content": "```json\n{\n  \"resumen\": \"Este PR cifra la base de datos de pedidos (requiere recrearla) y abre SSH del bastión a internet. También expande permisos IAM, habilita versionado en S3 y aumenta retención de logs.\",\n  \"riesgos_adicionales\": [\n    {\n      \"recurso\": \"aws_db_instance.pedidos\",\n      \"riesgo\": \"Downtime durante recreación: cambio de db.r6g.large a db.t3.medium reduce capacidad de memoria (386GB → 4GB). Sin snapshot final y deletion_protection=false aumenta riesgo de pérdida de datos.\",\n      \"severidad\": \"alta\"\n    },\n    {\n      \"recurso\": \"aws_security_group_rule.bastion_ssh\",\n      \"riesgo\": \"SSH expuesto a 0.0.0.0/0 sin restricción de IP. Debería limitarse a rangos corporativos específicos.\",\n      \"severidad\": \"alta\"\n    },\n    {\n      \"recurso\": \"aws_iam_role_policy.ci_deploy\",\n      \"riesgo\": \"iam:PassRole permite escalar privilegios. Combinado con ecs:* sin restricción de recurso, permite asumir roles arbitrarios.\",\n      \"severidad\": \"alta\"\n    }\n  ],\n  \"preguntas\": [\n    \"¿Por qué cambiar de db.r6g.large a db.t3.medium? ¿Se validó que t3.medium soporta la carga de producción? ¿Hay plan de rollback si falla?\",\n    \"¿El bastión SSH realmente necesita estar abierto a internet (0.0.0.0/0) o puede restringirse a IPs corporativas o VPN?\",\n    \"¿Por qué se amplían los permisos IAM a iam:PassRole y ecs:*? ¿Puede limitarse a acciones y recursos específicos?\"\n  ]\n}\n```",
     "refusal": null,
     "reasoning": null
    },
    "tokens_entrada": 1001,
-   "tokens_salida": 461
+   "tokens_salida": 503
   }
  ],
  "agente|anthropic/claude-haiku-4.5": [
@@ -558,7 +388,7 @@
      {
       "type": "function",
       "index": 0,
-      "id": "toolu_bdrk_01KEVRRrbfPsPg9UNH1Sdbkx",
+      "id": "toolu_bdrk_01S1SK7dW3ySMZWqqdF6UnVk",
       "function": {
        "name": "get_pods",
        "arguments": "{\"namespace\": \"tienda\"}"
@@ -567,7 +397,7 @@
      {
       "type": "function",
       "index": 1,
-      "id": "toolu_bdrk_01D3MmMnuYVRjY12byDEJMJD",
+      "id": "toolu_bdrk_01JR6CKRNSt8xRtFzYeEwdoP",
       "function": {
        "name": "get_events",
        "arguments": "{\"namespace\": \"tienda\"}"
@@ -576,7 +406,7 @@
      {
       "type": "function",
       "index": 2,
-      "id": "toolu_bdrk_017D98yDrfLo5gr2i817KNgz",
+      "id": "toolu_bdrk_018GSZ4n9rBKrazXBCSY3yGA",
       "function": {
        "name": "rollout_history",
        "arguments": "{\"deployment\": \"checkout\"}"
@@ -590,14 +420,14 @@
   {
    "mensaje": {
     "role": "assistant",
-    "content": "Veo que hay 2 pods en CrashLoopBackOff con la revisión 8 (checkout-7d9f8c6b5), mientras que hay 1 pod antiguo (checkout-6b8d5f7c9) que sigue corriendo. La revisión 8 cambió DB_URL a DATABASE_URL. Voy a inspeccionar los pods que fallan para ver los logs y la configuración.",
+    "content": "Veo que hay 2 pods en CrashLoopBackOff con la nueva ReplicaSet (7d9f8c6b5), mientras que hay 1 pod antiguo (6b8d5f7c9) que está Running. El rollout history muestra que la revisión 8 cambió `DB_URL` a `DATABASE_URL`. Esto es sospechoso. Voy a inspeccionar los pods que están fallando.",
     "refusal": null,
     "reasoning": null,
     "tool_calls": [
      {
       "type": "function",
       "index": 0,
-      "id": "toolu_bdrk_016TXVs8iAKw47tKXb174gep",
+      "id": "toolu_bdrk_01VxBqiK75DJKDqYwGyxnpk1",
       "function": {
        "name": "describe_pod",
        "arguments": "{\"nombre\": \"checkout-7d9f8c6b5-q8m3z\"}"
@@ -606,37 +436,37 @@
      {
       "type": "function",
       "index": 1,
-      "id": "toolu_bdrk_01C1ZkhXoL7W1oza4z4gGXrm",
+      "id": "toolu_bdrk_019uVnAih6tPQWYGddikDzA2",
       "function": {
-       "name": "logs",
-       "arguments": "{\"pod\": \"checkout-7d9f8c6b5-q8m3z\", \"previous\": false}"
+       "name": "describe_pod",
+       "arguments": "{\"nombre\": \"checkout-6b8d5f7c9-lm2np\"}"
       }
      },
      {
       "type": "function",
       "index": 2,
-      "id": "toolu_bdrk_01DbsXaeQqLMykDojpmfiqLH",
+      "id": "toolu_bdrk_01M8jDftrjU7RbVLk2MvnJQJ",
       "function": {
        "name": "logs",
-       "arguments": "{\"pod\": \"checkout-7d9f8c6b5-q8m3z\", \"previous\": true}"
+       "arguments": "{\"pod\": \"checkout-7d9f8c6b5-q8m3z\", \"previous\": false}"
       }
      }
     ]
    },
    "tokens_entrada": 1981,
-   "tokens_salida": 307
+   "tokens_salida": 296
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "Perfecto. El error es claro: `KeyError: 'DATABASE_URL'`. La aplicación espera la variable `DATABASE_URL` pero no existe. Voy a verificar el ConfigMap que se está usando:",
+    "content": "¡Perfecto! Encontré la causa raíz. El error es claro: `KeyError: 'DATABASE_URL'`. La versión 2.14.0 espera la variable `DATABASE_URL`, pero el ConfigMap `checkout-config` probablemente aún tiene `DB_URL`. Voy a verificar el ConfigMap.",
     "refusal": null,
     "reasoning": null,
     "tool_calls": [
      {
       "type": "function",
       "index": 0,
-      "id": "toolu_bdrk_01Koq7vs6u4m4EJExoD9LJyh",
+      "id": "toolu_bdrk_01Eqfk8XJfSrvJeiNDB4gGCL",
       "function": {
        "name": "get_configmap",
        "arguments": "{\"nombre\": \"checkout-config\"}"
@@ -644,92 +474,42 @@
      }
     ]
    },
-   "tokens_entrada": 3086,
-   "tokens_salida": 108
+   "tokens_entrada": 3051,
+   "tokens_salida": 138
   },
   {
    "mensaje": {
     "role": "assistant",
-    "content": "Excelente. He encontrado la causa raíz:\n\n**Causa raíz**: El ConfigMap `checkout-config` contiene la variable `DB_URL`, pero la revisión 8 del deployment cambió el código para esperar `DATABASE_URL`. El ConfigMap no fue actualizado para reflejar este cambio de nombre de variable.\n\n**Evidencia**:\n1. Los logs muestran: `KeyError: 'DATABASE_URL'` - la aplicación busca DATABASE_URL\n2. El ConfigMap tiene `DB_URL` (nombre antiguo), no `DATABASE_URL`\n3. El rollout history muestra que la revisión 8 \"renombra DB_URL a DATABASE_URL en settings (#412)\"\n4. Los pods con la revisión 8 fallan, mientras que el pod antiguo (revisión 6) sigue corriendo\n\n**Solución inmediata**: Hacer rollback a la revisión anterior (7 o 6) que aún funciona.\n\n```json\n{\n  \"causa\": \"Desajuste entre el código de la aplicación (revisión 8) y la configuración. La revisión 8 cambió el nombre de variable de DB_URL a DATABASE_URL, pero el ConfigMap checkout-config no fue actualizado y sigue teniendo DB_URL. La aplicación falla al iniciar porque no encuentra DATABASE_URL.\",\n  \"evidencia\": [\n    \"logs del pod checkout-7d9f8c6b5-q8m3z: KeyError: 'DATABASE_URL' en checkout/settings.py línea 21\",\n    \"describe_pod: Image checkout:2.14.0 (revisión 8) en CrashLoopBackOff\",\n    \"get_configmap checkout-config: contiene DB_URL (antiguo), no DATABASE_URL\",\n    \"rollout_history: revisión 8 cambió 'renombra DB_URL a DATABASE_URL en settings (#412)'\",\n    \"get_pods: pod antiguo checkout-6b8d5f7c9 (revisión 6) sigue Running, los nuevos checkout-7d9f8c6b5 (revisión 8) fallan\"\n  ],\n  \"comando_sugerido\": \"kubectl rollout undo deployment/checkout -n tienda\",\n  \"alternativa\": \"Actualizar el ConfigMap checkout-config para renombrar DB_URL a DATABASE_URL, luego hacer rollout restart del deployment\",\n  \"reversible\": true\n}\n```",
+    "content": "Perfecto. Confirmé la causa raíz:\n\n**Causa raíz**: El ConfigMap `checkout-config` tiene la variable `DB_URL`, pero la versión 2.14.0 del código espera `DATABASE_URL`. Esto es un desajuste entre el cambio de código (revisión 8) y la configuración.\n\n```json\n{\n  \"causa\": \"Desajuste de configuración: el código 2.14.0 espera la variable de entorno DATABASE_URL, pero el ConfigMap checkout-config solo define DB_URL. El cambio de nombre en la revisión 8 no fue acompañado de una actualización del ConfigMap.\",\n  \"evidencia\": [\n    \"logs del pod checkout-7d9f8c6b5-q8m3z: KeyError: 'DATABASE_URL' en /app/checkout/settings.py línea 21\",\n    \"describe_pod checkout-7d9f8c6b5-q8m3z: imagen 2.14.0 en CrashLoopBackOff, exit code 1\",\n    \"describe_pod checkout-6b8d5f7c9-lm2np: imagen 2.13.2 Running sin errores (usa DB_URL)\",\n    \"get_configmap checkout-config: solo contiene DB_URL, no DATABASE_URL\",\n    \"rollout_history: revisión 8 cambió 'renombra DB_URL a DATABASE_URL en settings (#412)'\"\n  ],\n  \"comando_sugerido\": \"kubectl rollout undo deployment/checkout -n tienda\",\n  \"alternativa\": \"kubectl set env configmap/checkout-config DATABASE_URL='postgresql://checkout@pedidos-db.tienda.svc:5432/pedidos' -n tienda && kubectl rollout restart deployment/checkout -n tienda\",\n  \"reversible\": true\n}\n```",
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 3284,
-   "tokens_salida": 595
+   "tokens_entrada": 3279,
+   "tokens_salida": 455
   }
  ],
  "mensaje slack|anthropic/claude-haiku-4.5": [
   {
    "mensaje": {
     "role": "assistant",
-    "content": "```\n🚨 INCIDENTE: Deployment checkout en CrashLoopBackOff\n\nPROBLEMA: Pods checkout-7d9f8c6b5 (rev 8) fallan al iniciar. KeyError: 'DATABASE_URL' en settings.py línea 21.\n\nCAUSA: Revisión 8 renombró DB_URL → DATABASE_URL en código, pero ConfigMap checkout-config no fue actualizado. Sigue con DB_URL antiguo.\n\nEVIDENCIA: logs muestran KeyError, describe_pod en CrashLoopBackOff, get_configmap confirma DB_URL (no DATABASE_URL), rollout_history muestra cambio en rev 8.\n\nCOMANDO: kubectl rollout undo deployment/checkout -n tienda\n\nRESPONDER: APROBAR o RECHAZAR\n```",
+    "content": "```\n🚨 INCIDENTE: Pod checkout en CrashLoopBackOff\n\n❌ QUÉ PASA\nDeployment checkout caído. Pods con imagen 2.14.0 fallan en inicio.\n\n🔍 CAUSA\nDesajuste de configuración: código 2.14.0 espera variable DATABASE_URL, pero ConfigMap checkout-config solo define DB_URL. El cambio de nombre en revisión 8 no actualizó el ConfigMap.\n\n📋 EVIDENCIA\n• KeyError 'DATABASE_URL' en /app/checkout/settings.py:21\n• Pod 2.14.0 en CrashLoopBackOff (exit code 1) vs pod 2.13.2 Running sin errores\n• ConfigMap checkout-config: solo DB_URL presente\n• Rollout history: revisión 8 renombró variable sin sincronizar ConfigMap\n\n⚡ COMANDO PROPUESTO\n`kubectl rollout undo deployment/checkout -n tienda`\n\nResponder: **APROBAR** o **RECHAZAR**\n```",
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 397,
-   "tokens_salida": 199
+   "tokens_entrada": 408,
+   "tokens_salida": 266
   }
  ],
  "ruta ci (reintento)|qwen/qwen3-coder-30b-a3b-instruct": [
   {
    "mensaje": {
     "role": "assistant",
-    "content": "{\n  \"categoria\": \"flaky\",\n  \"causa\": \"El test test_conciliacion_pagos falló con un ConnectionError: Connection reset by peer, lo cual es un error intermitente.\",\n  \"arreglo\": \"Se debe implementar un mecanismo de reintentar la solicitud HTTP en caso de fallos de conexión intermitentes. También se puede aumentar el tiempo de espera de la conexión.\",\n  \"reintentar\": true\n}",
+    "content": "{\n  \"categoria\": \"dependencia\",\n  \"causa\": \"No se encontró el ejecutable pg_config al intentar instalar psycopg2 durante la construcción de Docker.\",\n  \"arreglo\": \"Instalar la dependencia development package de PostgreSQL en la imagen Docker antes de instalar psycopg2. Por ejemplo, agregar `RUN apt-get update && apt-get install -y libpq-dev python3-dev` al Dockerfile.\",\n  \"reintentar\": false\n}",
     "refusal": null,
     "reasoning": null
    },
-   "tokens_entrada": 305,
-   "tokens_salida": 99
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\n  \"categoria\": \"flaky\",\n  \"causa\": \"El test test_conciliacion_pagos falló con un ConnectionError: Connection reset by peer, lo cual es un error intermitente.\",\n  \"arreglo\": \"Se debe implementar un mecanismo de reintentar la solicitud HTTP en caso de fallos de conexión intermitentes. También se puede aumentar el tiempo de espera de la conexión.\",\n  \"reintentar\": true\n}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 305,
-   "tokens_salida": 99
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\n  \"categoria\": \"credenciales\",\n  \"causa\": \"El token de acceso de AWS ha expirado durante la actualización del servicio ECS.\",\n  \"arreglo\": \"Renovar las credenciales de AWS en las variables de entorno del workflow. Verificar que el secret AWS_SECRET_ACCESS_KEY esté actualizado y que las credenciales tengan la duración adecuada.\",\n  \"reintentar\": false\n}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 295,
-   "tokens_salida": 94
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\n  \"categoria\": \"test\",\n  \"causa\": \"Un test falló por una aserción que verifica un valor de descuento incorrecto.\",\n  \"arreglo\": \"Revisar la lógica del cálculo de descuentos en el código y actualizar el test con el valor esperado correcto.\",\n  \"reintentar\": false\n}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 326,
-   "tokens_salida": 78
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\n  \"categoria\": \"flaky\",\n  \"causa\": \"El test test_conciliacion_pagos falló con un ConnectionError: Connection reset by peer, lo cual es un error intermitente.\",\n  \"arreglo\": \"Se debe implementar un mecanismo de reintentar la solicitud HTTP en caso de fallos de conexión intermitentes. También se puede aumentar el tiempo de espera de la conexión.\",\n  \"reintentar\": true\n}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 305,
-   "tokens_salida": 99
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "{\n  \"categoria\": \"infraestructura\",\n  \"causa\": \"El proceso de construcción fue eliminado con código de salida 137, indicando que se agotó la memoria del runner.\",\n  \"arreglo\": \"Aumentar los recursos del runner o optimizar el proceso de build para usar menos memoria. Se puede probar con un runner de mayor capacidad o agregar swap space.\",\n  \"reintentar\": false\n}",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 293,
-   "tokens_salida": 93
+   "tokens_entrada": 294,
+   "tokens_salida": 98
   }
  ],
  "router (escalado)|anthropic/claude-haiku-4.5": [
@@ -742,16 +522,6 @@
    },
    "tokens_entrada": 231,
    "tokens_salida": 30
-  },
-  {
-   "mensaje": {
-    "role": "assistant",
-    "content": "```json\n{\"tipo\": \"pr_terraform\", \"servicio\": \"infra-prod\", \"confianza\": 0.95}\n```",
-    "refusal": null,
-    "reasoning": null
-   },
-   "tokens_entrada": 286,
-   "tokens_salida": 36
   },
   {
    "mensaje": {

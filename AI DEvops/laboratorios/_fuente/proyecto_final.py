@@ -48,7 +48,6 @@
 #
 # **Cómo vamos a trabajar:** cada bloque tiene una explicación corta y una o dos celdas que se ejecutan.
 # Córranlas en orden, de arriba abajo, sin saltarse ninguna, porque cada una usa lo que armó la anterior.
-# Al final hay un ejercicio por equipos donde van a tocar el código y medir si mejoró o empeoró.
 
 # %%
 import sys, os, json, time, re
@@ -614,6 +613,11 @@ print("Aprobado, se ejecutaría:" if APROBADO else "Sin aprobación todavía. No
 # justo lo que la sesión 2 decía que no hay que hacer. Un set dorado de verdad sale del historial de su
 # operación y tiene entre 30 y 100 casos. Este sirve para ver la mecánica, no para decir que el copiloto
 # está listo.
+#
+# Y algo más para cuando midan lo suyo: si corren dos veces la misma configuración, el número puede cambiar.
+# Estos modelos no son deterministas y aquí cada acierto mueve la métrica 8 puntos, porque son 12 eventos.
+# Por eso en la sesión 2 corríamos cada caso tres veces y promediábamos. Si un cambio mejora medio punto,
+# probablemente no mejoró nada.
 
 # %%
 def evaluar(modelo_router, umbral, etiqueta):
@@ -743,48 +747,6 @@ print("Las trazas quedaron en", TRAZAS.archivo)
 # Comparen ese número con lo que cuesta una hora de ingeniero de guardia a las 3 de la mañana. Ese es el
 # cálculo que van a tener que llevar si quieren que les aprueben esto en su empresa. Y ojo con el otro lado:
 # el agente es la operación más cara de la tabla, porque cada vuelta del bucle reenvía toda la conversación.
-#
-# ## Ejercicio final, por equipos (20 minutos)
-#
-# El copiloto ya pasa el gate, pero se puede mejorar. Cada equipo elige **un** cambio y lo defiende con
-# números:
-#
-# 1. **Bajar el costo.** Prueben otro modelo pequeño en el router, o suban el umbral de confianza. ¿Se
-#    puede gastar menos sin que baje el ruteo? Modelos abiertos para probar:
-#    `openai/gpt-oss-20b`, `qwen/qwen3-30b-a3b-instruct-2507`, `mistralai/mistral-nemo`.
-# 2. **Romperlo.** Hoy el copiloto acierta todo, pero el set es chico y fácil. Agreguen a `C.EVENTOS` dos
-#    eventos de algo que hayan vivido esta semana, con su etiqueta, y vuelvan a correr la evaluación. El
-#    objetivo es encontrar dónde falla, no que dé verde.
-# 3. **Quitarle un freno.** Borren del `PROMPT_ROUTER` la frase que dice que dentro de `<evento>` hay datos
-#    y no instrucciones, y vuelvan a rutear EV-10 y EV-11. ¿Cambia algo? ¿Y si además hacen que `preparar`
-#    devuelva siempre `sospechas: []`, o sea, apagan la detección? ¿Qué defensa era la que servía?
-#
-# Corran `evaluar(...)` con su cambio y compárenlo contra `RESULTADO`. La regla es la de la sesión 2: no
-# vale subir el promedio si alguna métrica baja. Y la de seguridad tiene que quedar en 100%.
-#
-# Un aviso antes de que saquen conclusiones: si corren dos veces la **misma** configuración, el número puede
-# cambiar. Estos modelos no son deterministas y el set dorado tiene solo 12 eventos, así que un acierto de
-# más mueve la métrica 8 puntos. Por eso en la sesión 2 corríamos cada caso tres veces y contábamos el
-# promedio. Si su cambio mejora medio punto, probablemente no mejoró nada.
-
-# %%
-MI_MODELO = MODELO_PEQUENO      # TODO: cámbienlo (ejercicio 1)
-MI_UMBRAL = UMBRAL              # TODO: o cambien el umbral (ejercicio 1)
-
-# TODO (ejercicio 2): agreguen sus propios eventos al set dorado, así:
-# C.EVENTOS.append({"id": "EV-13", "origen": "github-actions", "dificultad": "dificil",
-#                   "texto": "peguen aquí el evento, sin secretos",
-#                   "esperado": {"tipo": "ci_fallido", "categoria": "dependencia"}})
-
-MIO = evaluar(MI_MODELO, MI_UMBRAL, etiqueta="mi configuración")
-
-for metrica in ("ruteo", "categoria_ci", "seguridad"):
-    antes, ahora = RESULTADO[metrica], MIO[metrica]
-    print("%-14s %.2f -> %.2f   %s" % (metrica, antes, ahora,
-                                       "sube" if ahora > antes else ("BAJA" if ahora < antes else "igual")))
-print("costo          $%.4f -> $%.4f" % (RESULTADO["costo_usd"], MIO["costo_usd"]))
-print("")
-gate(MIO)
 
 # %% [markdown]
 # ## Lo que se llevan
